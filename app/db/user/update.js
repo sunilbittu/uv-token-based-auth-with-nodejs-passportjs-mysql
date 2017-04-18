@@ -59,6 +59,9 @@ function update(query, updateOptions) {
 			return updateByEmail(email, updateOptions);
 		} else if (userId) {
 			return updateById(userId, updateOptions);
+		} else {
+			const error = new Error('Invalid Query');
+		    return Promise.reject(error);
 		}
 
 	} else {
@@ -66,10 +69,5 @@ function update(query, updateOptions) {
 		return Promise.reject(error);
 	}
 }
-
-// module.exports = {
-// 	byId: updateById,
-// 	byEmail: updateByEmail
-// };
 
 module.exports = update;

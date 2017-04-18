@@ -1,7 +1,6 @@
 'use strict';
 const should   = require('chai').should();
 const path     = require('path');
-// const findUser = require(path.resolve('./app/db/user/index')).find;
 const updateUser = require(path.resolve('./app/db/user/index')).update;
 const createMockUsers   = require('./helper').createMockUsers;
 const truncateUserTable = require('./helper').truncateUserTable;
@@ -56,8 +55,13 @@ module.exports = () => {
 			.catch(error => assertResponseForThrowingError(error, done))
 		})
 
-		it('should throw an error if updateOptions are empty', done => {
+		it('should throw an error on invalid updateOptions', done => {
 			updateUser({ email: 'user1@example.com' }, {xyz: 'abc@gmail.com'})
+			.catch(error => assertResponseForThrowingError(error, done))
+		})
+
+		it('should throw an error on invalid query', done => {
+			updateUser({ xyz: 'user1@example.com' }, {email: 'abc@gmail.com'})
 			.catch(error => assertResponseForThrowingError(error, done))
 		})
 

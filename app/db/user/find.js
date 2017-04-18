@@ -54,45 +54,5 @@ function find (query) {
 	}
 }
 
-// const myUsers = [];
-
-// for (let i = 0; i < 5; i++) {
-// 	if ((i % 2) === 0) {
-// 		myUsers.push({
-// 			fbname: `fbuser${i}`,
-// 			fbid: `fbidvalue${i}`,
-// 			email: `fbuser${i}@example.com`
-// 		})
-// 	} else {
-// 		myUsers.push({
-// 			name: `user${i}`,
-// 			email: `user${i}@example.com`
-// 		})
-// 	}
-// }
-
-// Promise.all(myUsers.map(x => {
-//   return exeQuery('INSERT INTO users SET ?', x);
-// }))
-// .then(results => {
-// 	console.log(results)
-// })
-// .catch(error => {
-// 	console.log(error);
-// })
-
-// find({email: 'user1@example.com'}).
-// find({fbId: 'fbidvalue1'})
-// .then(res => console.log(res))
-// .catch(error => {
-// 	console.log('sorry');
-// })
 
 module.exports = find;
-
-// module.exports = {
-//     byId: findByUserId,
-//     byUserId: findByUserId,
-//     byEmail: findByEmail,
-//     byFbId: findByFbId
-// };

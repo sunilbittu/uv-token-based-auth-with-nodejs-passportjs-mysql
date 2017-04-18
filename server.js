@@ -12,4 +12,4 @@ app.use(bodyParser.json());
 
 require('./app/routes/index')(app);
 
-app.listen(PORT, () => console.log('Server Is Up And Running On Port %', PORT));
+app.listen(PORT, () => console.log('Server Is Up And Running On Port %d', PORT));
