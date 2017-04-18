@@ -31,7 +31,8 @@ function generateQueryValues (updateOptions) {
 	}	
 }
 
-function isUpdated (result) {
+function checkIsUpdated (result) {
+	// console.log(result)
 	const isUpdated = result && (result.changedRows === 1) && (result.affectedRows === 1);
 	return isUpdated;
 }
@@ -40,14 +41,14 @@ function updateById (userId, updateOptions) {
 	const SQLQuery = `UPDATE users SET ? WHERE id = "${userId}"`;
 	return generateQueryValues(updateOptions)
 	.then(updateQueryValues => exeQuery(SQLQuery, updateQueryValues))
-	.then(result => isUpdated(result))
+	.then(checkIsUpdated)
 }
 
 function updateByEmail (email, updateOptions) {
 	const SQLQuery = `UPDATE users SET ? WHERE email = "${email}"`;
 	return generateQueryValues(updateOptions)
 	.then(updateQueryValues => exeQuery(SQLQuery, updateQueryValues))
-	.then(result => isUpdated(result))
+	.then(checkIsUpdated)
 }
 
 function update(query, updateOptions) {

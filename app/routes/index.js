@@ -8,6 +8,6 @@ function isAuthorized (req, res, next) {
 
 module.exports = app => {
 	app.use('/auth/', AuthRouter);
-    app.use('/api/*', isAuthorized); //Should Be Authorised To Access /api/* paths of server
+    // app.use('/api/*', isAuthorized); //Should Be Authorised To Access /api/* paths of server
     app.use('/api/user', userRouter)
 }
