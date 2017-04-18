@@ -1,0 +1,36 @@
+{
+  "name": "uv-token-based-auth-with-nodejs-passportjs-mysql",
+  "version": "1.0.0",
+  "description": "Simple Token Based User Registeration And Login Work Flow Using JWT, NodeJs (PassportJs) And MySQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha --recursive",
+    "start": "NODE_ENV=development node server.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shivarajnaidu/uv-token-based-auth-with-nodejs-passportjs-mysql.git"
+  },
+  "author": "yuvaraj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shivarajnaidu/uv-token-based-auth-with-nodejs-passportjs-mysql/issues"
+  },
+  "homepage": "https://github.com/shivarajnaidu/uv-token-based-auth-with-nodejs-passportjs-mysql#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
+    "morgan": "^1.8.1",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "supertest": "^3.0.0"
+  }
+}
