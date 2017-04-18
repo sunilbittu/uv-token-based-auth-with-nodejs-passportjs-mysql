@@ -13,3 +13,7 @@ app.use(bodyParser.json());
 require('./app/routes/index')(app);
 
 app.listen(PORT, () => console.log('Server Is Up And Running On Port %d', PORT));
+
+if (process.env.NODE_ENV === 'test') {
+	module.exports = app;
+}
