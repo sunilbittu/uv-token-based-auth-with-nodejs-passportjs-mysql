@@ -2,18 +2,17 @@
 
 const fb = {
 	clientId: '',
-	clientSecret: '',
-	callBackUrl: ''
+	clientSecret: ''
 };
 
 const google = {
 	clientId: '',
 	clientSecret: ''
-	callBackUrl: ''
 };
 
 const jwt = {
-	secret: 'Yuvaraj'
+	secret: 'Yuvaraj',
+    tokenExpirePeriod: (60 * 60 * 2) //expire time in seconds or we can also use string like "2h";
 }
 
 const config = {
