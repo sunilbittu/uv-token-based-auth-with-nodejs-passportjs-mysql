@@ -1,6 +1,7 @@
 'use strict';
 const mysql    = require('mysql');
-const dbConfig = require('../../../config/index').DB;
+const path     = require('path');
+const dbConfig = require(path.resolve('./config/index')).DB;
 const pool     = mysql.createPool(dbConfig);
 
 
