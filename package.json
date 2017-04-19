@@ -4,6 +4,7 @@
   "description": "Simple Token Based User Registeration And Login Work Flow Using JWT, NodeJs (PassportJs) And MySQL",
   "main": "server.js",
   "scripts": {
+    "pretest": "node bin/setup",
     "test": "NODE_ENV=test mocha --recursive",
     "start": "NODE_ENV=development node server.js"
   },

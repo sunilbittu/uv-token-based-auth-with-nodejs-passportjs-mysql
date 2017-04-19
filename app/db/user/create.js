@@ -150,54 +150,6 @@ function createFbUSer (email, fbId, fbName) {
 		const error = new Error('Something Went Wrong.. Failed To Fullfill Requirements Of Fb Login');
 		return Promise.reject(error);
 	}
-
-
-	
-
-// old
-	// const fbUser = {
-	// 	fbid: fbId,
-	// 	email: email,
-	// 	fbname: fbName
-	// };
-
-
-	// return findUser.byFbId(fbId)
-	// .then(results => {
-	// 	const isFbUser = (results.length > 0);
-
-	// 	if (isFbUser) {			
-	// 		const user = results[0];
-	// 		return {
-	// 			isSuccess: true,
-	// 			user: user
-	// 		}
-	// 	} else if (email) {			
-	// 		return findUser.byEmail(email)
-	// 		.then(results => {
-	// 			const isUserExist = (results.length > 0);
-	// 			if (isUserExist) {
-	// 				const SQLQuery = 'UPDATE users SET fbid = ?, fbname = ? WHERE email = ?';
-	// 				return exeQuery(SQLQuery, [fbId, fbName, email]);
-	// 			} else {
-	// 				const SQLQuery = `INSERT INTO users SET ?`;
-	// 				return exeQuery(SQLQuery, fbUser);
-	// 			}
-	// 		})
-	// 		.then(results => {
-	// 			fbUser.id = results.insertId;
-	// 			return {
-	// 				isSuccess: true,
-	// 				user: fbUser
-	// 			}
-	// 		})
-	// 	} 
-	// })
-	// .catch(error => {
-	// 	const message = 'Failed To Create Fb User';
-	// 	return generateErrorRespnse(error, message);
-
-	// })
 }
 
 
