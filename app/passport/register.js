@@ -13,14 +13,29 @@ passport.use('register', new LocalStrategy({
    .then(user => {
    	if (user) {
    		// If User Alredy Exist....
-   		 return done(null, false, {message: 'User Already Exist'})
+         const message = 'User Already Exist';
+         console.log(message);
+         return done(null, false, { message: message });
 
-   	} else {
+      } else {
    		// If User Not Exist.... Create New One...
+         const user = {
+            email: email,
+            password: password,
+            name: name
+         };
 
-   	}
+         User.create(user)
+         .then(user => {
+            if (user) {
+               const message = 'User Successfully Created';
+               console.log(message);
+               return done(null, user, { message: message });
+            }
+         })
+         .catch(done);
+      }
    })
    .catch(done)
-
 }
 ))
