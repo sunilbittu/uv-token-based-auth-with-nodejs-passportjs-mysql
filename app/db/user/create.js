@@ -1,58 +1,28 @@
 'use strict';
 const exeQuery     = require('../lib/exe-query');
 const passwordUtil = require('../lib/password');
-const findUser     = require('./find');
-
-
-function errorHandler (error) {
-	return {
-		isSuccess: false,	
-		message: error.message,
-		error: error
-	}
-}
-
 
 function createLocalUser (email, password, name) {
 
-	function checkAndCreateUser (user) {
-		if (user) {
-			return {
-				isSuccess: false,
-				message: 'User Already Exist',
-				user: user
-			};
-		} else {
-			const user = {
-				name: name,
-				email: email
-			};
-
-			return passwordUtil.hash(password)
-			.then(passwordHash => {
-				user.password = passwordHash;				
-				const SQLQuery = 'INSERT INTO users SET ?';
-				return exeQuery(SQLQuery, user);
-			})
-			.then(results => {
-				user.id = results.insertId;
-				return {
-					isSuccess: true,
-					message: 'User Successfully Created',
-					user: user
-				}
-			})
-
-		}
-
-	}
-
-	const isOK = email && name && password;
+	const isOK = ( email && name && password );
 
 	if (isOK) {
-		return findUser({email : email})
-		.then(checkAndCreateUser)
-		.catch(errorHandler)
+		const user = {
+			email: email,
+			name: name
+		};
+
+		return passwordUtil.hash(password)
+		.then(passwordHash => {
+			user.password  = passwordHash;				
+			const SQLQuery = 'INSERT INTO users SET ?';
+			return exeQuery(SQLQuery, user);
+		})
+		.then(results => {
+			user.id = results.insertId;
+			return user;
+		})
+
 	} else {
 		const error = new Error('Should Provide Email, Password And Name');
 		return Promise.reject(error);
@@ -61,90 +31,26 @@ function createLocalUser (email, password, name) {
 }
 
 function createFbUSer (email, fbId, fbName) {
+	
+	const isOK = fbId && fbName; // Minimum Requirement To Proceed Further..
 
-	function updateLocalUserToFbUser (user) {
-		const userId   = user.id;
-		const SQLQuery = `UPDATE users SET fbid = "${fbId}", fbname = "${fbName}" WHERE id = "${userId}"`;
-		return exeQuery(SQLQuery)
-		.then(results => {
-			// console.log(results);
-			const updatedUser  = Object.assign({}, user);
-			updatedUser.fbname = fbName;
-			updatedUser.fbid   = fbId; 
-			return updatedUser;
-		})
-
-	}
-
-	function createNewFbUser () {
-		const newFbUser = {
+	if (isOK) {
+		const user = {
 			fbid: fbId,
 			fbname: fbName
 		};
 		
 		if (email) {
-			newFbUser.email = email;
+			user.email = email;
 		}
 
 		const SQLQuery  = 'INSERT INTO users SET ?';
 
-		return exeQuery(SQLQuery, newFbUser)
+		return exeQuery(SQLQuery, user)
 		.then(results => {
-			newFbUser.id = results.insertId;
-			return newFbUser;
+			user.id = results.insertId;
+			return user;
 		})
-	}
-
-	function checkLocalUserExist (user) {
-		if (user) {
-			return updateLocalUserToFbUser(user);
-		} else {
-			return createNewFbUser();
-		}
-
-	}
-
-	function checkFbUserExistOrCreateOne (fbUser) {
-
-		function successResponse (user) {
-			const resData = {
-				isSuccess: true,
-				message: 'Success',
-				user: user
-			};
-			return resData;
-		}
-
-		if (fbUser) {
-			return successResponse(fbUser)
-		} else if (email) {
-			return findUser({email : email})
-			.then(checkLocalUserExist)
-			.then(successResponse)
-			.catch(errorHandler)
-		} else {
-			return createNewFbUser()
-			.then(successResponse)
-			.catch(errorHandler)
-		}
-	}
-	
-	const isOK = fbId && fbName; // Minimum Requirement To Proceed Further..
-
-	if (isOK) {
-		/*
-		   if fbId and fbName is present check whether user with that fbId exist or not ...
-		   if exist just --> return that user 
-		   if not --> check email is present or not..
-		   if we have email then again check with email whether user with this email exist or not ...
-		   if exist update him with fb id we have..
-		   if not exist create new fb User
-		   if we dont have email ...
-		   then just create new fb user with fb id and name.. and ask him to provide email
-		*/
-		return findUser({fbId : fbId})
-		.then(checkFbUserExistOrCreateOne)
-		.catch(errorHandler)
 
 	} else {
 		const error = new Error('Something Went Wrong.. Failed To Fullfill Requirements Of Fb Login');
