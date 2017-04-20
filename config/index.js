@@ -9,7 +9,7 @@ if (NODE_ENV === 'production') {
 	CONFIG_DIR           = 'development';
 }
 else if (NODE_ENV === 'test') {
-	CONFIG_DIR = 'production';
+	CONFIG_DIR = 'test';
 } else {
 	CONFIG_DIR = 'development';
 }
