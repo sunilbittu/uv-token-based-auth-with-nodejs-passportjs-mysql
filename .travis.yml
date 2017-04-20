@@ -6,5 +6,6 @@ env:
 - NODE_ENV=test
 services:
   - mysql
+sudo: true
 before_install:
   - mysql -u root -e 'CREATE DATABASE IF NOT EXISTS test; SHOW DATABASES;'
