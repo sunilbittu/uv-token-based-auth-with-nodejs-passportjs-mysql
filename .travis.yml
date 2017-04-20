@@ -4,3 +4,7 @@ node_js:
   - "6"
 env:
 - NODE_ENV=test
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
