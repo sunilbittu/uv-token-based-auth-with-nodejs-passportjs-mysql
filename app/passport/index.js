@@ -8,6 +8,7 @@ const passport = require('passport');
 
 require('./register')(passport);
 require('./login')(passport);
+require('./fb-login')(passport);
 
 
 

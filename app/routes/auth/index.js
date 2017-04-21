@@ -10,7 +10,7 @@ const googleLogin = require('./google-login');
 
 router.use('/register', register);
 router.use('/login', login);
-router.use('/fb', fbLogin);
+router.use('/facebook', fbLogin);
 router.use('/google', googleLogin);
 
 // module.exports = AuthRoutes
