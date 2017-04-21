@@ -1,6 +1,8 @@
 'use strict';
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../db/user');
+const passwordUtils = require('../lib/password');
+const Token = require('../lib/token');
 
 module.exports = passport => {
 
@@ -13,12 +15,32 @@ module.exports = passport => {
         User.find({ email: email })
             .then(user => {
                 if (user) {
-                    // If User Exist.... Allow Them To Login
+                    // If User Exist.... 
+
+                    const hashedPassword = user.password;
+                    //Check Is Password Is Matching Or Not..
+                    passwordUtils.isMatched(password, hashedPassword)
+                        .then(isMatched => {
+                            if (isMatched) {
+                                const message = 'Success';
+                                const payLoad = Object.assign({}, user);
+                                payLoad.passord = undefined;
+                                Token.generate(payLoad)
+                                return done(null, token, { message: message })
+                            } else {
+                                // IfPassword Was Not Matched.... Fail To Login
+                                const message = 'Incorrect Password';
+                                return done(null, false, { message: message });
+
+                            }
+                        })
+
                     const message = 'Login Success';
                     console.log(message);
                     return done(null, user, { message: message });
                 } else {
                     // If User Not Exist.... Fail To Login
+                    const message = 'User Not Found: Incorrect Username';
                     return done(null, false, { message: message });
                 }
             })

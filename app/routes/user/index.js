@@ -1,7 +1,7 @@
 'use strict';
 const express = require('express');
 const path    = require('path');
-const User    = require('../../db/user/index');
+const User    = require('../../db/user');
 const router  = express.Router();
 
 

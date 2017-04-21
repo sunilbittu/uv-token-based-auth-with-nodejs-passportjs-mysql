@@ -4,7 +4,7 @@ const pool   = require('./pool');
 function exeQuery (query, queryValues) {
 	return new Promise((resolve, reject) => {
 		
-		pool.getConnection((err, connection) => {
+		pool.getConnection((error, connection) => {
 			
 			function cb (error, results) {
 				connection.release();

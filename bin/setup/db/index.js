@@ -1,6 +1,6 @@
 'use strict';
 const pool        = require('./lib/pool');
-const tableSetups = require('./tables/index');
+const tableSetups = require('./tables');
 
 tableSetups
 .then(isAllOk => {
