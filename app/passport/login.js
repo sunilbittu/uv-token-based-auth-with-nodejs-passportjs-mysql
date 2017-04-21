@@ -22,11 +22,11 @@ module.exports = passport => {
                     passwordUtils.isMatched(password, hashedPassword)
                         .then(isMatched => {
                             if (isMatched) {
-                                const message = 'Success';
+                                const message = 'Login Success';
                                 const payLoad = Object.assign({}, user);
                                 payLoad.passord = undefined;
                                 Token.generate(payLoad)
-                                return done(null, token, { message: message })
+                                .then(token => done(null, token, { message: message }));
                             } else {
                                 // IfPassword Was Not Matched.... Fail To Login
                                 const message = 'Incorrect Password';
@@ -34,13 +34,9 @@ module.exports = passport => {
 
                             }
                         })
-
-                    const message = 'Login Success';
-                    console.log(message);
-                    return done(null, user, { message: message });
                 } else {
                     // If User Not Exist.... Fail To Login
-                    const message = 'User Not Found: Incorrect Username';
+                    const message = 'User Not Found';
                     return done(null, false, { message: message });
                 }
             })
