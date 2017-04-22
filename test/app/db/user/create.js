@@ -18,7 +18,7 @@ mockUsers.fb = {
 }
 
 mockUsers.google = {
-    email: 'mockgoogleuser@gmail.com',
+    gmail: 'mockgoogleuser@gmail.com',
     googleId: 'mockgoogleuserid',
     googleName: 'mock google user'
 }
@@ -147,21 +147,23 @@ module.exports = () => {
             after(onAfterHandler);
 
             it('should throw error if email was not provided', done => {
-                const localMockUser = Object.assign({}, mockUsers.local);
-                localMockUser.email = undefined;
-                createUser(localMockUser, 'google')
+                const googleMockUser = Object.assign({}, mockUsers.google);
+                delete googleMockUser.gmail;
+                createUser(googleMockUser, 'google')
                     .catch(error => assertResponseForThrowingError(error, done));
             });
 
             it('should throw error if googleId was not provided', done => {
-                const localMockUser = Object.assign({}, mockUsers.local);
-                createUser(localMockUser, 'google')
+                const googleMockUser = Object.assign({}, mockUsers.google);
+                delete googleMockUser.googleId;
+                createUser(googleMockUser, 'google')
                     .catch(error => assertResponseForThrowingError(error, done));
             });
 
             it('should throw error if email provided is not gmail', done => {
-                const localMockUser = Object.assign({}, mockUsers.local);
-                createUser(localMockUser, 'google')
+                const googleMockUser = Object.assign({}, mockUsers.google);
+                googleMockUser.gmail = 'googleuser@example.com';
+                createUser(googleMockUser, 'google')
                     .catch(error => assertResponseForThrowingError(error, done));
             });
 

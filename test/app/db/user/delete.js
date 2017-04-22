@@ -74,7 +74,7 @@ module.exports = () => {
 		})
 
 		it('should return true if user with given userId deleted successfully', done => {
-			removeUser({ userId: 2 })
+			removeUser({ userId: 1 })
 			.then(resData => assertionOnSuccesfulDeletion(resData, done))
 			.catch(done);
 		})

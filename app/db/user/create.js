@@ -60,7 +60,7 @@ function createFbUser(email, fbId, fbName) {
 
 function createGoogleUser(gmail, googleId, googleName) {
 
-    console.log(gmail, googleId, googleName)
+    // console.log(gmail, googleId, googleName)
 
 	const isGmail = gmail && (gmail.split('@')[1] === 'gmail.com'); // Check Whether Provided Email Is Gmail Or Not
     const isOK = isGmail && googleId && googleName; // Minimum Requirement To Proceed Further..
