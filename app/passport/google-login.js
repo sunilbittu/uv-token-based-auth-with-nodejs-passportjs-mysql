@@ -9,19 +9,18 @@ const googleConfig = {
 };
 
 const User = require('../db/user');
-// const passwordUtils = require('../lib/password');
 const Token = require('../lib/token');
 
 module.exports = passport => {
 
-    function createFbUser(email, fbId, fbName) {
+    function createGoogleUser(email, googleId, googleName) {
         const user = {
-            fbId: fbId,
-            fbName: fbName,
-            email: email
+            googleName: googleName,
+            googleId: googleId,
+            gmail: email
         };
 
-        return User.create(user, 'fb');
+        return User.create(user, 'google');
     }
 
     function updateUser(userId, updateOptions) {
@@ -30,14 +29,14 @@ module.exports = passport => {
 
     passport.use('google-login', new GoogleStrategy(googleConfig,
         (accessToken, refreshToken, profile, done) => {
-            console.log(accessToken)
+
             const googleId = profile.id;
             const googleName = profile.displayName;
             const emails = profile.emails; // Array Of Objects contains emails..
             const photos = profile.photos; // Array Of Objects contains profile pic urls..
 
             let email;
-            let googleProPic;
+            let photo;
 
             if (emails && emails.length > 0) {
                 email = profile.emails[0].value;
@@ -46,48 +45,48 @@ module.exports = passport => {
             if (photos && photos.length > 0) {
                 photo = profile.photos[0].value;
             }
-            
 
-            // User.find({ fbId: fbId })
-            //     .then(fbUser => {
-            //         if (fbUser) {
-            //             return fbUser;
-            //         } else if (email) {
-            //             return User.find({ email: email })
-            //                 .then(user => {
-            //                     if (user) {
-            //                         const userId = user.id;
-            //                         const updateOptions = {
-            //                             fbId: fbId,
-            //                             fbName: fbName
-            //                         };
-            //                         return updateUser(userId, updateOptions)
-            //                             .then(isUpdated => {
-            //                                 if (isUpdated) {
-            //                                     user.fbid = fbId;
-            //                                     user.fbname = fbName;
-            //                                     return user;
-            //                                 }
-            //                             })
-            //                     } else {
-            //                         return createFbUser(email, fbId, fbName);
-            //                     }
-            //                 })
-            //         } else {
-            //             return createFbUser(email, fbId, fbName);
-            //         }
-            //     })
-            //     .then(user => {
-            //         const message = 'Success';
-            //         const payLoad = Object.assign({}, user);
-            //         payLoad.password = undefined;
-            //         Token.generate(payLoad)
-            //             .then(token => done(null, token, { message: message }));
-            //     })
-            //     .catch(done)
+            User.find({ email: email })
+                .then(user => {
+                    if (user) {
+                        const googleId = user.googleid;
+                        const googleName = user.googlename;
+                        const gmail = user.gmail;
+                        const isPerfectGoogleUser = (googleId && googleName && gmail);
+                        if (isPerfectGoogleUser) {
+                            return user;
+                        } else {
+                            const userId = user.id;
+                            const updateOptions = {
+                                googleId: googleId,
+                                googleName: googleName,
+                                gmail: email
+                            };
 
-            // console.log(accessToken, refreshToken, profile);
+                            return updateUser(userId, updateOptions)
+                                .then(isUpdated => {
+                                    if (isUpdated) {
+                                        const googleUser = Object.assign({}, user);
+                                        googleUser.googleid = googleId;
+                                        googleUser.googlename = googleName;
+                                        googleUser.gmail = email;
+                                        return googleUser;
+                                    }
+                                })
+                        }
 
+                    } else {
+                        return createGoogleUser(email, googleId, googleName)
+                    }
+                })
+                .then(user => {
+                    const message = 'Success';
+                    const payLoad = Object.assign({}, user);
+                    delete payLoad.password;
+                    Token.generate(payLoad)
+                        .then(token => done(null, token, { message: message }));
+                })
+                .catch(done);
         }
     ));
 

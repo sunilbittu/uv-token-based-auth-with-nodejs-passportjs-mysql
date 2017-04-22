@@ -10,7 +10,6 @@ const fbConfig = {
 };
 
 const User = require('../db/user');
-// const passwordUtils = require('../lib/password');
 const Token = require('../lib/token');
 
 module.exports = passport => {
@@ -72,7 +71,7 @@ module.exports = passport => {
                 .then(user => {
                     const message = 'Success';
                     const payLoad = Object.assign({}, user);
-                    payLoad.password = undefined;
+                    delete payLoad.password;
                     Token.generate(payLoad)
                         .then(token => done(null, token, { message: message }));
                 })

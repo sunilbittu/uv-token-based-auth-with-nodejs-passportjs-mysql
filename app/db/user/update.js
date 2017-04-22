@@ -9,7 +9,7 @@ function generateQueryValues(updateOptions) {
     const name = updateOptions.name;
     const fbId = updateOptions.fbId;
     const fbName = updateOptions.fbName;
-    const gmail = updateOptions.gmail
+    const gmail = updateOptions.gmail;
     const googleId = updateOptions.googleId;
     const googleName = updateOptions.googleName;
 

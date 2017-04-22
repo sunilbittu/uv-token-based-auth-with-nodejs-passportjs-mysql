@@ -60,6 +60,8 @@ function createFbUser(email, fbId, fbName) {
 
 function createGoogleUser(gmail, googleId, googleName) {
 
+    console.log(gmail, googleId, googleName)
+
 	const isGmail = gmail && (gmail.split('@')[1] === 'gmail.com'); // Check Whether Provided Email Is Gmail Or Not
     const isOK = isGmail && googleId && googleName; // Minimum Requirement To Proceed Further..
 
@@ -79,7 +81,7 @@ function createGoogleUser(gmail, googleId, googleName) {
             })
 
     } else {
-        const error = new Error('Something Went Wrong.. Failed To Fullfill Requirements Of Fb Login');
+        const error = new Error('Something Went Wrong.. Failed To Fullfill Requirements Of Google Login');
         return Promise.reject(error);
     }
 }
@@ -100,7 +102,8 @@ function create(User = {}, typeOfUser) {
     } else if (typeOfUser === 'google') {
         const googleId = User.googleId;
         const googleName = User.googleName;
-        const email = User.email;
+        const email = User.gmail;
+        // const email = User.gmail || User.email;
         return createGoogleUser(email, googleId, googleName);
     } else {
         const error = new Error('Invalid User Type');

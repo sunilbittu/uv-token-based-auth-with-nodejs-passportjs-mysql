@@ -5,15 +5,15 @@ const router = express.Router();
 
 
 router.route('/')
-    .get(passport.authenticate('google-login', { session: false }));
+    .get(passport.authenticate('google-login', { session: false, scope: ['email'] }));
 
 router.route('/callback')
     .get((req, res, next) => {
         passport.authenticate('google-login', { session: false }, (error, token, info) => {
             if (error) {
                 console.log(error)
-                return next(error);    
-            } 
+                return next(error);
+            }
 
             if (token) {
                 let resData = `
@@ -29,8 +29,8 @@ router.route('/callback')
                 res.send(resData)
             } else {
                 res.send('Sorry !')
-            }                
-            
+            }
+
         })(req, res, next);
     })
 
