@@ -61,7 +61,7 @@ function updateById(userId, updateOptions) {
 }
 
 function updateByEmail(email, updateOptions) {
-    const SQLQuery = `UPDATE users SET ? WHERE email = "${email}"`;
+    const SQLQuery = `UPDATE users SET ? WHERE email = "${email}" OR gmail = "${email}"`;
     return generateQueryValues(updateOptions)
         .then(updateQueryValues => exeQuery(SQLQuery, updateQueryValues))
         .then(checkIsUpdated)
