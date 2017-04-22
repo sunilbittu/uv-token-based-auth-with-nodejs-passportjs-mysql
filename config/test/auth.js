@@ -1,8 +1,9 @@
 'use strict';
 
 const fb = {
-	clientId: '',
-	clientSecret: ''
+	clientId: '',  // Facebook App Id 
+	clientSecret: '', // Facebook App Secret..
+	callbackURL: '/auth/facebook/callback'
 };
 
 const google = {

@@ -5,6 +5,7 @@ function removeById (userId) {
 	const SQLQuery = `DELETE FROM users WHERE id = "${userId}"`;
 	return exeQuery(SQLQuery)
 	.then(result => {
+		// console.log(result)
 		const isRemoved = (result.affectedRows === 1);
 		return isRemoved;
 	})

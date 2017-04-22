@@ -15,6 +15,9 @@ function createTable (tableName = 'users') {
 	password varchar(500),
 	fbid varchar(300),
 	fbname varchar(100),
+   gmail varchar(100),
+   googleid varchar(300),
+   googlename varchar(300),
 	PRIMARY KEY (id)
 	)`;
    // console.log(SQLQuery)

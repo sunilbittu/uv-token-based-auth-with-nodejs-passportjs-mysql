@@ -10,12 +10,19 @@ function errorHandler (error) {
 function createMockUsers () {
 	const mockUsers = [];
 
-	for (let i = 0; i < 5; i++) {
+	for (let i = 0; i < 2; i++) {
 		const fbUser = {
 			fbname: `fbuser${i}`,
 			fbid: `fbid${i}`,
 			email: `fbuser${i}@example.com`
 		};
+
+		const googleUser = {
+			googlename: `googleuser${i}`,
+			googleid: `googleid${i}`,
+			email: `googleuser${i}@gmail.com`
+		};
+
 		const localUser = {
 			name: `user${i}`,
 			email: `user${i}@example.com`

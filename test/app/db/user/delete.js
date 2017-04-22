@@ -57,22 +57,26 @@ module.exports = () => {
 
 		it('should return true if user with given email deleted successfully', done => {
 			removeUser({ email: 'user1@example.com' })
-			.then(resData => assertionOnSuccesfulDeletion(resData, done));
+			.then(resData => assertionOnSuccesfulDeletion(resData, done))
+			.catch(done);
 		})
 
 		it('should return false if user with given email not exist', done => {
 			removeUser({ email: 'xyz@example.com' })
-			.then(resData => assertionOnFailedToDelete(resData, done));
+			.then(resData => assertionOnFailedToDelete(resData, done))
+			.catch(done);
 		})
 
 		it('should return true if user with given userId deleted successfully', done => {
-			removeUser({ userId: 1 })
-			.then(resData => assertionOnSuccesfulDeletion(resData, done));
+			removeUser({ userId: 2 })
+			.then(resData => assertionOnSuccesfulDeletion(resData, done))
+			.catch(done);
 		})
 
 		it('should return false if user with given userId not exist', done => {
 			removeUser({ userId: 2434254554 })
-			.then(resData => assertionOnFailedToDelete(resData, done));
+			.then(resData => assertionOnFailedToDelete(resData, done))
+			.catch(done);
 		})
 
 

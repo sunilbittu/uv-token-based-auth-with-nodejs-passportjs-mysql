@@ -9,13 +9,30 @@ function generateQueryValues(updateOptions) {
     const name = updateOptions.name;
     const fbId = updateOptions.fbId;
     const fbName = updateOptions.fbName;
-    const isOk = (email || password || name || fbId || fbName);
+    const gmail = updateOptions.gmail
+    const googleId = updateOptions.googleId;
+    const googleName = updateOptions.googleName;
+
+    const isGooglDetailsUpdate = (gmail || googleName || googleId);
+    const isFbDetailsUpdate = (fbId || fbName);
+    const isLocalDetailsUpdate = (email || password || name);
+    const isOk = (isLocalDetailsUpdate || isFbDetailsUpdate || isGooglDetailsUpdate);
 
     user.email = email || undefined;
     user.name = name || undefined;
     user.fbid = fbId || undefined;
     user.fbname = fbName || undefined;
+    user.googlename = googleName || undefined;
+    user.googleid = googleId || undefined;
+    user.gmail = gmail || undefined;
 
+    for (const x in user) {
+        if (user.hasOwnProperty(x) && (!user[x])) {
+            delete user[x];
+        }
+    }
+
+    // console.log(user)
     if (password) {
         return passwordUtil.hash(password)
             .then(passwordHash => {

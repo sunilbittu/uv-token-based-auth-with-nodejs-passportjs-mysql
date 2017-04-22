@@ -85,6 +85,12 @@ module.exports = () => {
 			.then(resData => assertionOnFailedToUpdate(resData, done));
 		})
 
+		// Checks For Fb Details Updation..
+		it('should return true if user with given email updated successfully with given fb details', done => {
+			updateUser({ email: 'user1@example.com' }, { fbId: 'fbidxyz', fbName: 'fbUserxyz' })
+			.then(resData => assertionOnSuccesfulUpdation(resData, done))
+			.catch(done);
+		})
 
 	})
 }
