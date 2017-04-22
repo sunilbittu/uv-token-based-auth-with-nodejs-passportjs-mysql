@@ -20,7 +20,7 @@ function createMockUsers () {
 		const googleUser = {
 			googlename: `googleuser${i}`,
 			googleid: `googleid${i}`,
-			email: `googleuser${i}@gmail.com`
+			gmail: `googleuser${i}@gmail.com`
 		};
 
 		const localUser = {
@@ -28,7 +28,7 @@ function createMockUsers () {
 			email: `user${i}@example.com`
 		}
 
-		mockUsers.push(fbUser, localUser)
+		mockUsers.push(fbUser, localUser, googleUser)
 	}
 
 	return Promise.all(mockUsers.map(user => exeQuery('INSERT INTO users SET ?', user)))

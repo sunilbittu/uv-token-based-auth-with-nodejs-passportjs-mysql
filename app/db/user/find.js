@@ -20,7 +20,7 @@ function findByUserId (userId) {
 
 function findByEmail (email) {
 	if (email) {
-		const SQLQuery = `SELECT * FROM users WHERE email = "${email}"`;
+		const SQLQuery = `SELECT * FROM users WHERE email = "${email}" OR gmail = "${email}"`;
 		return exeQuery(SQLQuery)
 		.then(checkUser);
 	}
