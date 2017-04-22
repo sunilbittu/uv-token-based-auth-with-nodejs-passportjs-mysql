@@ -12,7 +12,7 @@ function removeById (userId) {
 }
 
 function removeByEmail (email) {
-	const SQLQuery = `DELETE FROM users WHERE email = "${email}"`;
+	const SQLQuery = `DELETE FROM users WHERE email = "${email}" OR gmail = "${email}"`;
 	return exeQuery(SQLQuery)
 	.then(result => {
 		const isRemoved = (result.affectedRows === 1);
