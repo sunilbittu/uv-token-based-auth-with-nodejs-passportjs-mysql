@@ -8,8 +8,10 @@
             var user = $scope.user;
             Auth.logIn(user.email, user.password)
                 .then(function(data) {
-                    if (data && data.message && (!data.success)) {
-                        $scope.message = data.message;
+                    if (data && data.message && (!data.token)) {
+                        var message = data.message;
+                        $scope.message = message;
+                        $.notify(message, 'error');
                     }
                 })
         };
