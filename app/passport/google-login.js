@@ -49,10 +49,8 @@ module.exports = passport => {
             User.find({ email: email })
                 .then(user => {
                     if (user) {
-                        const googleId = user.googleid;
-                        const googleName = user.googlename;
-                        const gmail = user.gmail;
-                        const isPerfectGoogleUser = (googleId && googleName && gmail);
+                      
+                        const isPerfectGoogleUser = user.googleid;
                         if (isPerfectGoogleUser) {
                             return user;
                         } else {
