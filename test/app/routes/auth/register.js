@@ -16,7 +16,7 @@ function missingCredentialsTestHandler(error, res, done) {
 
 module.exports = request => {
 
-    describe('User Registeration', () => {
+    describe('User Registration', () => {
 
         it('should create new user and return token', done => {
             request.post('/auth/register')
@@ -37,6 +37,7 @@ module.exports = request => {
                 .expect(200, { message: 'User Already Exist' })
                 .end(done);
         })
+
         it('should send Missing credentials message', done => {
             const wrongMockUser = Object.assign({}, mockUser);
             wrongMockUser.email = 'xyzwronguser@gmail.com';
@@ -47,8 +48,6 @@ module.exports = request => {
                 .expect(200)
                 .end((error, res) => missingCredentialsTestHandler(error, res, done));
         })
-
-
 
         it('should send Missing credentials message', done => {
             const wrongMockUser = Object.assign({}, mockUser);
