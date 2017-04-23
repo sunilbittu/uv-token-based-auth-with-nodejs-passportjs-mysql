@@ -33,13 +33,17 @@
 
 /* Login Form */
 
+.fb-login-button,
+.google-login-button {
+	color: white;
+	font-weight: bold;
+}
+
 .fb-login-button {
 	background-color: #4267B2;
-	color: white;
 }
 .google-login-button {
 	background-color: #DB4437;
-	color: white;
 }
 
 .fb-login-button:hover {
