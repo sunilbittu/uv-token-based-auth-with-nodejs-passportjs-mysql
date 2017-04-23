@@ -17,9 +17,32 @@ module.exports = passport => {
             .then(user => {
                 if (user) {
                     // If User Alredy Exist....
-                    const message = 'User Already Exist';
-                    // console.log(message);
-                    return done(null, false, { message: message });
+                    if (!user.password) {
+                        const updateOptions = {
+                            name: name,
+                            password: password
+                        };
+
+                        User.update({ userId: user.id }, updateOptions)
+                            .then(isUpdated => {
+                                if (isUpdated) {
+                                    const payLoad = Object.assign({}, user);
+                                    delete payLoad.password;
+                                    return Token.generate(payLoad);
+                                }
+                            })
+                            .then(token => {
+                                if (token) {
+                                    const message = 'Success';
+                                    // console.log(message);
+                                    return done(null, token, { message: message });
+                                }
+                            })
+                    } else {
+                        const message = 'User Already Exist';
+                        // console.log(message);
+                        return done(null, false, { message: message });
+                    }
                 } else {
                     // If User Not Exist.... Create New One...
                     const user = {
@@ -32,7 +55,7 @@ module.exports = passport => {
                         .then(user => {
                             if (user) {
                                 const payLoad = Object.assign({}, user);
-                                payLoad.password = undefined;
+                                delete payLoad.password;
                                 return Token.generate(payLoad);
                             }
                         })

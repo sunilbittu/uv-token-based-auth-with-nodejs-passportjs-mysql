@@ -15,8 +15,8 @@ module.exports = passport => {
         User.find({ email: email })
             .then(user => {
                 if (user) {
-                    // If User Exist.... 
-
+                    // If User Exist....
+                    
                     const hashedPassword = user.password;
                     //Check Is Password Is Matching Or Not..
                     passwordUtils.isMatched(password, hashedPassword)
@@ -24,14 +24,13 @@ module.exports = passport => {
                             if (isMatched) {
                                 const message = 'Login Success';
                                 const payLoad = Object.assign({}, user);
-                                payLoad.passord = undefined;
+                                delete payLoad.password;
                                 Token.generate(payLoad)
                                 .then(token => done(null, token, { message: message }));
                             } else {
                                 // IfPassword Was Not Matched.... Fail To Login
                                 const message = 'Incorrect Password';
                                 return done(null, false, { message: message });
-
                             }
                         })
                 } else {
