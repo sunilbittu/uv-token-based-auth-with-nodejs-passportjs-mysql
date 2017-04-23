@@ -2,7 +2,12 @@
 const checkAndSetupUserTable = require('./users');
 const tableSetups = [];
 
-tableSetups.push(checkAndSetupUserTable());
+tableSetups.push(checkAndSetupUserTable);
+
+function checkAndSetupTables () {
+
+	return Promise.all(tableSetups.map(tableSetup => tableSetup()));
+}
 
 
-module.exports = Promise.all(tableSetups);
+module.exports = checkAndSetupTables;
