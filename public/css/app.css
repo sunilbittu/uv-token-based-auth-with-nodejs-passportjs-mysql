@@ -1,0 +1,40 @@
+/* CUSTOM CSS */
+
+/* Glyphicons Font Url Change */
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../../fonts/glyphicons-halflings-regular.eot');
+  src: url('../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+
+/* USER FORM */
+
+#user-form, #user-update-form {
+	margin-top: 35%;
+}
+#user-update-form .form-heading, #user-form .form-heading {
+	margin: 5%;
+	font-weight: bold;
+}
+
+
+#user-detail-table {
+   margin-top: 10%;
+}
+
+#user-detail-table .panel-heading {
+   font-weight: 700;
+}
+#user-detail-table .panel button.btn {
+	margin-top: -6px;
+}
+
+/* USER EDIT AND DELETE BUTTONS */
+
+.action-user-edit,
+.action-user-delete {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: -5px;
+}
