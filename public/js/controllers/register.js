@@ -11,10 +11,17 @@
             var password = $scope.user.password;
             Auth.register(email, name, password)
                 .then(function(data) {
-                    if (data && data.message && (!data.success)) {
-                        $scope.message = data.message;
+                    if (data && data.message && (!data.token)) {
+                        var message = data.message;
+                        $scope.message = message;
+                        $.notify(message, 'error');
                     }
                 })
+                // .then(function(data) {
+                //     if (data && data.message && (!data.success)) {
+                //         $scope.message = data.message;
+                //     }
+                // })
         }
 
     }
