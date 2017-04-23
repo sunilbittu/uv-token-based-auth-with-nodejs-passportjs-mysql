@@ -17,11 +17,7 @@
                         $.notify(message, 'error');
                     }
                 })
-                // .then(function(data) {
-                //     if (data && data.message && (!data.success)) {
-                //         $scope.message = data.message;
-                //     }
-                // })
+
         }
 
     }

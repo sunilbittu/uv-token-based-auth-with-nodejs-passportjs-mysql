@@ -1,13 +1,5 @@
 /* CUSTOM CSS */
 
-/* Glyphicons Font Url Change */
-@font-face {
-  font-family: 'Glyphicons Halflings';
-  src: url('../../fonts/glyphicons-halflings-regular.eot');
-  src: url('../../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
-}
-
-
 /* USER FORM */
 
 #user-form, #user-update-form {
@@ -37,4 +29,22 @@
 	margin-left: 5px;
 	margin-right: 5px;
 	margin-top: -5px;
+}
+
+/* Login Form */
+
+.fb-login-button {
+	background-color: #4267B2;
+	color: white;
+}
+.google-login-button {
+	background-color: #DB4437;
+	color: white;
+}
+
+.fb-login-button:hover {
+	color: white;
+}
+.google-login-button:hover {
+	color: white;
 }
