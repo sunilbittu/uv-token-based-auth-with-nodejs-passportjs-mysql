@@ -25,7 +25,7 @@ module.exports = passport => {
     }
 
     function updateUser(userId, updateOptions) {
-        return User.update({ userId: userId })
+        return User.update({ userId: userId }, updateOptions)
     }
 
     passport.use('fb-login', new FacebookStrategy(fbConfig,

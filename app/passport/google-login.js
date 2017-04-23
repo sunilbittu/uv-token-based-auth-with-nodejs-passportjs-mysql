@@ -24,7 +24,7 @@ module.exports = passport => {
     }
 
     function updateUser(userId, updateOptions) {
-        return User.update({ userId: userId })
+        return User.update({ userId: userId }, updateOptions)
     }
 
     passport.use('google-login', new GoogleStrategy(googleConfig,
