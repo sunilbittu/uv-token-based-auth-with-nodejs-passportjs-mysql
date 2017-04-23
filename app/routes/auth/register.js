@@ -17,7 +17,6 @@ router.route('/')
             }
 
             // console.log(token)
-
             res.json(resData);
 
         })(req, res, next);

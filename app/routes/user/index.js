@@ -4,8 +4,18 @@ const path    = require('path');
 const User    = require('../../db/user');
 const router  = express.Router();
 
-
 router.route('/')
+.get((req, res) => {
+	const userId = req.userId;
+	User.find({ userId: userId })
+	.then(user => {
+		console.log(user);
+		res.json(user)
+	})
+	.catch(error => {
+		console.log(error)
+	})
+})
 .post((req, res) => {
 	const body = req.body;
 	const user = {};

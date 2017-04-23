@@ -16,16 +16,16 @@ router.route('/callback')
             }
 
             if (token) {
-                let resData = `
+                const resData = `
                 <!DOCTYPE html><html><head></head><body>
                 <mark>${token}</mark>
                 <script>
-                var token = ${token};
+                var token = "${token}";
                 sessionStorage.setItem('token', token);
-                //location.href = '/#!/profile';
+                location.href = '/';
                 </script>
-                </body></html>
-                `
+                </body></html>`;
+
                 res.send(resData)
             } else {
                 res.send('Sorry !')
