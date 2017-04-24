@@ -20,6 +20,6 @@ require('./app/routes')(app);
 
 app.listen(PORT, () => console.log('Server Is Up And Running On Port %d', PORT));
 
-if (process.env.NODE_ENV === 'test') {
-    module.exports = app;
-}
+// if (process.env.NODE_ENV === 'test') {
+//     module.exports = app;
+// }
