@@ -12,11 +12,14 @@ function generateQueryValues(updateOptions) {
     const gmail = updateOptions.gmail;
     const googleId = updateOptions.googleId;
     const googleName = updateOptions.googleName;
+    const passwordResetId = updateOptions.passwordResetId;
 
     const isGooglDetailsUpdate = (gmail || googleName || googleId);
     const isFbDetailsUpdate = (fbId || fbName);
     const isLocalDetailsUpdate = (email || password || name);
-    const isOk = (isLocalDetailsUpdate || isFbDetailsUpdate || isGooglDetailsUpdate);
+    const isPasswordReset = passwordResetId;
+
+    const isOk = (isLocalDetailsUpdate || isFbDetailsUpdate || isGooglDetailsUpdate || isPasswordReset);
 
     user.email = email || undefined;
     user.name = name || undefined;
@@ -25,9 +28,11 @@ function generateQueryValues(updateOptions) {
     user.googlename = googleName || undefined;
     user.googleid = googleId || undefined;
     user.gmail = gmail || undefined;
+    user.password_reset_id = passwordResetId || null;
 
     for (const x in user) {
-        if (user.hasOwnProperty(x) && (!user[x])) {
+        const isPasswordResetIdProp = (x === 'password_reset_id'); 
+        if (user.hasOwnProperty(x) && (!user[x]) && (!isPasswordResetIdProp)) {
             delete user[x];
         }
     }

@@ -11,7 +11,7 @@ const transporter = nodemailer.createTransport({
     }
 });
 
-module.exports = function(to, subject, text, html) {
+module.exports = function(to, subject, html, text =  '') {
 
     const mailOptions = {
         from: '"No Reply" <noreply@example.com>', // sender address
@@ -22,11 +22,15 @@ module.exports = function(to, subject, text, html) {
     };
 
     // send mail with defined transport object
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            // reject()
-            return console.log(error);
-        }
-        console.log('Message %s sent: %s', info.messageId, info.response);
+    return new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                reject(error);
+            } else {
+                console.log('Message %s sent: %s', info.messageId, info.response);
+                resolve(info);
+            }
+        });
     });
+
 };

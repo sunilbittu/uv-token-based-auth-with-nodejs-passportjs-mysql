@@ -18,6 +18,8 @@ function createTable (tableName = 'users') {
    gmail varchar(100),
    googleid varchar(300),
    googlename varchar(300),
+   password_reset_id varchar(300),
+   active int(1) DEFAULT 0,
 	PRIMARY KEY (id)
 	)`;
    // console.log(SQLQuery)
