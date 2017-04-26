@@ -25,7 +25,8 @@
 
     app.constant('AUTH_SERVER', {
         register: 'http://localhost:3000/auth/register',
-        login: 'http://localhost:3000/auth/login'
+        login: 'http://localhost:3000/auth/login',
+        forgotPassword: 'http://localhost:3000/auth/forgot-password'
     });
 
     app.config(['$routeProvider', function($routeProvider) {
@@ -43,6 +44,11 @@
             .when('/register', {
                 templateUrl: '../partials/register.html',
                 controller: 'registerCtrl',
+                isAuthNeeded: false
+            })
+            .when('/forgot-password', {
+                templateUrl: '../partials/forgot-password.html',
+                controller: 'forgotPasswordCtrl',
                 isAuthNeeded: false
             })
             .otherwise('/profile')

@@ -51,11 +51,20 @@
             TokenServ.removeToken();
         }
 
+        function forgotPassword(email) {
+            return $http.post(AUTH_SERVER.forgotPassword, { email: email })
+                .then(function(res) {
+                    var data = res.data;
+                    return data;
+                })
+        }
+
         return {
             register: register,
             isLoggedIn: isLoggedIn,
             logOut: logOut,
-            logIn: logIn
+            logIn: logIn,
+            forgotPassword: forgotPassword
         }
     }
 }())
